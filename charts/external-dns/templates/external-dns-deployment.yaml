@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "externaldns.name" . }}
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns
+{{ include "externaldns.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        app: external-dns
+{{ include "externaldns.labels" . | indent 8 }}
+    spec:
+      # Only use if you're also using RBAC
+      # serviceAccountName: external-dns
+      containers:
+      - name: external-dns
+        image: {{ template "externaldns.image" .Values.image }}
+        args:
+{{ include "externaldns.args" . | indent 8 }}
