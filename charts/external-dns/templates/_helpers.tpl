@@ -70,7 +70,16 @@ Arguments to connect externaldns to powerdns
 */}}
 {{- define "externaldns.args.pdns" -}}
 {{- with .pdns }}
+- --provider=pdns
 - --pdns-server={{ .server }}
 - --pdns-api-key={{ .api_key }}
+{{- end }}
+{{- end -}}
+
+{{- define "externaldns.envs" -}}
+{{- $root := . -}}
+{{ range ( keys . ) -}}
+- name: {{ upper . }}
+  value: {{ get $root . }}
 {{- end }}
 {{- end -}}

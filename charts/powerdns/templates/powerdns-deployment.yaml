@@ -39,7 +39,7 @@ spec:
                 command: 
                 - "/bin/sh"
                 - "-c"
-                - "a=0;while [ $a -lt 200 ];do sleep 1;a=$[a+1];echo 'stage: '$a;if nc -vz {{ $db_host }} 3306;then (! pdnsutil list-zone {{ .Values.powerdns.domain }}) && pdnsutil create-zone {{ .Values.powerdns.domain }};echo 'End Stage';a=200;fi;done"
+                - "a=0;while [ $a -lt 200 ];do sleep 1;a=$[a+1];echo 'stage: '$a;if nc -vz {{ $db_host }} 3306;then (! pdnsutil list-zone {{ .Values.powerdns.domain }}) && pdnsutil create-zone {{ .Values.powerdns.domain }} && pdnsutil add-record {{ .Values.powerdns.domain }} TXT {{ .Values.txtOwnerId }};echo 'End Stage';a=200;fi;done"
           resources:
 {{ toYaml .Values.powerdns.resources | indent 12 }}
           env:

@@ -22,3 +22,9 @@ spec:
         image: {{ template "externaldns.image" .Values.image }}
         args:
 {{ include "externaldns.args" . | indent 8 }}
+        env:
+        - name: PDNS_APIKEY
+          valueFrom:
+            name: {{ default "changeme" .Values.pdns_secret_name }}
+            key: PDNS_APIKEY
+{{ include "externaldns.envs" .Values.env | indent 8 }}

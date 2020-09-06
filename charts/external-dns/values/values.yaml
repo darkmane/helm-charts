@@ -6,9 +6,10 @@ args:
   source: service # or ingress or both
   provider:
     pdns:
-      api_key: foobarbaz
+      api_key: $PDNS_APIKEY
       server: powerdns-service-api.powerdns.svc.cluster.local
   owner_id: foo
   domain_filter: external-dns-test.my-org.com # will make ExternalDNS see only the zones matching provided domain; omit to process all available zones in PowerDNS
   log_level: debug
   interval: 30s
+env: {}
