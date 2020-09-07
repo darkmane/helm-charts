@@ -25,6 +25,7 @@ spec:
         env:
         - name: PDNS_APIKEY
           valueFrom:
-            name: {{ default "changeme" .Values.pdns_secret_name }}
-            key: PDNS_APIKEY
+            secretKeyRef:
+              name: {{ default "changeme" .Values.pdns_secret_name }}
+              key: PDNS_APIKEY
 {{ include "externaldns.envs" .Values.env | indent 8 }}
