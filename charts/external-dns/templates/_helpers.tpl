@@ -61,6 +61,9 @@ Provide the arguments for externaldns
 - --txt-owner-id={{ .owner_id }}
 - --domain-filter={{ .domain_filter }}
 - --log-level={{ .log_level }}
+{{ if .log_format -}}
+- --log-format={{.log_format}}
+{{- end }}
 - --interval={{ .interval }}
 {{- end }}
 {{- end -}}

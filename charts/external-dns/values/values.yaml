@@ -11,5 +11,6 @@ args:
   owner_id: foo
   domain_filter: external.local # will make ExternalDNS see only the zones matching provided domain; omit to process all available zones in PowerDNS
   log_level: debug
+  log_format: json
   interval: 30s
 env: {}
