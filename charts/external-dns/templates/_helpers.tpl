@@ -55,7 +55,7 @@ Build the full image
 Provide the arguments for externaldns
 */}}
 {{- define "externaldns.args" -}}
-{{- with .Values.args }}
+{{- with .Values.args -}}
 - --source={{ .source }}
 {{ template "externaldns.args.pdns" .provider }}
 - --txt-owner-id={{ .owner_id }}
@@ -72,11 +72,11 @@ Provide the arguments for externaldns
 Arguments to connect externaldns to powerdns
 */}}
 {{- define "externaldns.args.pdns" -}}
-{{- with .pdns }}
+{{ with .pdns -}}
 - --provider=pdns
 - --pdns-server={{ .server }}
 - --pdns-api-key={{ .api_key }}
-{{- end }}
+{{- end -}}
 {{- end -}}
 
 {{- define "externaldns.envs" -}}
