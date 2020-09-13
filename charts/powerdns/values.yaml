@@ -130,9 +130,9 @@ admin:
   mysql_user: "powerdns"
   ingress:
     enabled: "false"
-    class: "traefik"
+    class: "istio"
     path: "/"
-    hostname: "powerdns-admin"
+    hostname: "admin.pdns"
   requests:
     memory: "512Mi"
     cpu: "300m"

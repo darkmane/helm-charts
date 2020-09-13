@@ -5,16 +5,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-{{- if eq .Values.admin.ingress.class "traefik" }}
+{{- if .Values.admin.ingress.class }}
   annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/frontend-entry-points: http,https
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
-    traefik.ingress.kubernetes.io/redirect-permanent: "true"
-{{- end }}
-{{- if eq .Values.admin.ingress.class "nginx" }}
-  annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: {{ .Values.admin.ingress.class }}
+{{- include "powerdns.ingress.annotations" .Values.admin.ingress.class | indent 4 -}}
 {{- end }}
 spec:
   rules:
