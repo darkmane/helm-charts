@@ -5,6 +5,10 @@ metadata:
   name: {{ template "powerdns.fullname" . }}-service-admin
   labels:
 {{ include "powerdns.labels" . | indent 4 }}
+{{- with .Values.service.admin.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   type: {{ .Values.admin.service.type }}
   ports:
