@@ -10,13 +10,13 @@ service:
       type: LoadBalancer
       port: 53
       annotations:
-        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: dns_sharing_key
     udp:
       enabled: true
       type: LoadBalancer
       port: 53
       annotations:
-        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: dns_sharing_key
   api:
     type: ClusterIP
     port: 8081
@@ -29,7 +29,7 @@ image:
   repository: pschiffe/pdns-mysql
   tag: alpine
   pullPolicy: IfNotPresent
-domain: external.local
+domain: k8s.home
 master: "yes"
 api: "yes"
 webserver: "yes"
@@ -38,7 +38,7 @@ webserver_allow_from: "0.0.0.0/0"
 version_string: "anonymous"
 default_ttl: "1500"
 soa_minimum_ttl: "1200"
-default_soa_name: "ns1.external.local"
+default_soa_name: "ns1.k8s.home"
 mysql_host: "127.0.0.1"
 mysql_database: "powerdns"
 mysql_user: "powerdns"
@@ -75,7 +75,7 @@ powerdns:
     repository: pschiffe/pdns-mysql
     tag: alpine
     pullPolicy: IfNotPresent
-  domain: external.local
+  domain: k8s.home
   master: "yes"
   api: "yes"
   webserver: "yes"
@@ -84,7 +84,7 @@ powerdns:
   version_string: "anonymous"
   default_ttl: "1500"
   soa_minimum_ttl: "1200"
-  default_soa_name: "ns1.external.local"
+  default_soa_name: "ns1.k8s.home"
   # mysql_host: "127.0.0.1"
   mysql_database: "powerdns"
   mysql_user: "powerdns"
